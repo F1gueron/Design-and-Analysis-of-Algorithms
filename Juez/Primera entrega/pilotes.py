@@ -1,38 +1,37 @@
-from collections import deque
+from collections import  deque
 
+def bfsAux(graph, visited, vertex):
+    to_visit = deque([vertex])
+    visited[vertex] = True
 
-def bfsAux(g, visited, v):
-    q = deque()
-    visited[v] = True
-    q.append(v)
-    while q:
-        aux = q.popleft()
-        for adj in g[aux]:
-            if not visited[adj]:
-                q.append(adj)
-                visited[adj] = True
+    while to_visit:
+        current_vertex = to_visit.popleft()
 
+        for adjacent in graph[current_vertex]:
+            if not visited[adjacent]:
+                to_visit.append(adjacent)
+                visited[adjacent] = True
 
-def bfs(g):
-    n = len(g)
-    visited = [False] * n
-    ncc = 0
-    for v in range(0, n):
-        if not visited[v]:
-            bfsAux(g, visited, v)
-            ncc += 1
-    return ncc
+def bfs(graph):
+    num_vertices = len(graph)
+    visited = [False] * num_vertices
+    num_connected_components = 0
 
+    for vertex in range(num_vertices):
+        if not visited[vertex]:
+            bfsAux(graph, visited, vertex)
+            num_connected_components += 1
+
+    return num_connected_components
 
 if __name__ == '__main__':
-    n,m = map(int, input().strip().split())
-    g = []
-    for _ in range(n):
-        g.append([])
-    for _ in range(m):
-        a,b = map(int, input().strip().split())
-        g[a].append(b)
-        g[b].append(a)
+    n, m = map(int, input().strip().split())
+    graph = [[] for _ in range(n)]
 
-    ncc = bfs(g)
-    print(ncc)
+    for _ in range(m):
+        a, b = map(int, input().strip().split())
+        graph[a].append(b)
+        graph[b].append(a)
+
+    num_connected_components = bfs(graph)
+    print(num_connected_components)

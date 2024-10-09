@@ -1,22 +1,25 @@
-# Depth.first search
+
+def dfsRec(node, graph, visit):
+    visit.add(node)
+    print("Visiting node " + str(node), end = "\t")
+    for u in graph[node]:
+        if u not in visit:
+            dfsRec(u,graph,visit)
+
 
 def dfs(g):
+    n = len(g) - 1
     visited = set()
-    n = len(g)
-    for v in range(1,n):
+    for v in range(1, n + 1):
         if v not in visited:
-            dfsRec(v,visited, g)
+            dfsRec(v,g,visited)
 
-def dfsRec(node,visited,g):
-    print("Visiting node " + str(node))
-    visited.add(node)
-    for neigh in g[node]:
-        if neigh not in visited:
-            dfsRec(neigh,visited,g)
 
-#Data definition
+#Main prog.
 
-gAdjList = [
+#Adjacency List
+
+graph_AdjList = [
     [],
     [2,4,8],
     [1,3,4],
@@ -29,5 +32,5 @@ gAdjList = [
     [7,8]
 ]
 
-visited = set()
-dfsRec(1,visited,gAdjList)
+dfs(graph_AdjList)
+
