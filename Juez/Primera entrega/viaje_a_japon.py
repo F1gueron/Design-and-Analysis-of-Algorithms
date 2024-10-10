@@ -1,48 +1,40 @@
-from collections import deque
+def dfsRec(node, graph, visit):
+    visit.add(node)
+    for u in graph[node]:
+        if u not in visit:
+            dfsRec(u, graph, visit)
 
+def dfs(g, starting_node, total_nodes):
+    visited = set()
+    dfsRec(starting_node, g, visited)
 
-def bfs_aux(v, g, visited):
-    visited[v] = True
-    q = deque()
-    q.append(v)
-    while q:
-        aux = q.popleft()
-        for adj in g[aux]:
-            if not visited[adj]:
-                visited[adj] = True
-                q.append(adj)
+    return len(visited) == total_nodes
 
-
-def bfs(g):
+def invert_graph(g):
     n = len(g)
-    visited = [False] * n
-    disconnected_nodes = 0
-    for v in range(n):
-        if not visited[v]:
-            bfs_aux(v, g, visited)
-            disconnected_nodes += 1
-    if disconnected_nodes == 1:
+    inverted = []
+    for _ in range(n):
+        inverted.append([])
+    for node in range(len(g)):
+        for v in g[node]:
+            inverted[v].append(node)
+    return inverted
+
+if __name__ == '__main__':
+    n, m = map(int, input().strip().split())
+    g = [[] for _ in range(n)]
+
+    for _ in range(m):
+        a, b = map(int, input().strip().split())
+        g[a].append(b)
+
+    exist_path = False
+    if dfs(g, 0, n):
+        inverted_g = invert_graph(g)
+        if dfs(inverted_g, 0, n):
+            exist_path = True
+
+    if exist_path:
         print("PERFECTO")
     else:
         print("CAMBIA EL ITINERARIO")
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    n,m = map(int,input().strip().split())
-    g = []
-    for _ in range (n):
-        g.append([])
-    for _ in range(m):
-        a,b = map(int,input().strip().split())
-        g[a].append(b)
-
-    if bfs(g):
-        print("Si")
-

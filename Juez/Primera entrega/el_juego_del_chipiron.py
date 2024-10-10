@@ -8,7 +8,6 @@ def bfs(g, n, m, shift,win):
 
     while q:
         x, y, shift = q.popleft()
-
         if (x,y) == win:
             return shift - 1
 
