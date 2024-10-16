@@ -1,19 +1,21 @@
 from collections import deque
 
 
-def bfs_aux(v, visited, fans,grade):
+def bfs_aux(v, visited, fans, grade, g):
     q = deque()
     visited[v] = True
     q.append(v)
     fans.append(v)
-    while q:
-        aux = q.popleft()
-        for adj in g[aux]:
-            if not visited[adj]:
-                visited[adj] = True
-                if aux == 0 and grade >= 3:
+    depth = 1
+    while q and depth < grade:
+        for _ in range(len(q)):
+            aux = q.popleft()
+            for adj in g[aux]:
+                if not visited[adj]:
+                    visited[adj] = True
                     q.append(adj)
-                fans.append(adj)
+                    fans.append(adj)
+        depth += 1
 
 
 
@@ -24,7 +26,7 @@ def bfs(g, grade):
     visited = [False] * n
     fans = []
     if grade > 0:
-        bfs_aux(0,visited,fans,grade)
+        bfs_aux(0,visited,fans,grade,g)
     else:
         fans.append(0)
     return len(fans)
