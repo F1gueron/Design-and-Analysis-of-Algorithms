@@ -1,4 +1,3 @@
-
 def getBestItem(candidates,data):
     bestRatio = -1
     bestItem = -1
