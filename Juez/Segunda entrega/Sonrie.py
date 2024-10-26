@@ -1,8 +1,8 @@
 def best(members, candidates):
-    best_ratio = -1
+    best_ratio = float('inf')
     best_item = -1
     for i in candidates:
-        if members[i][1]/members[i][2] > best_ratio:
+        if members[i][1]/members[i][2] < best_ratio:
             best_ratio = members[i][1]/members[i][2]
             best_item = i
     return best_item
@@ -23,7 +23,7 @@ def greedy(members):
             wait = time
         sol.append(actual_member[0])
         time += actual_member[3]
-
+        candidates.remove(best_candidate)
     return sol, wait
 
 if __name__ == "__main__":
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         urgence = int(data[2])
         time = int(data[3])
         members.append([name, pacience, urgence, time])
-    members.sort(key=lambda x: x[0])
+    members.sort()
     sol, wait = greedy(members)
     for result in sol:
         print(result)
