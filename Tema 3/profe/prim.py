@@ -20,9 +20,8 @@ def prim(g):
         candidates[end]=weight
     for i in range(2,n):
         nextNode, cost = selectMin(candidates, visited)
-        if cost<float('inf'):
-            sol+=cost
-            visited[nextNode]=True
+        sol+=cost
+        visited[nextNode]=True
         for start, end, weight in g[nextNode]:
             if not visited[end]:
                 candidates[end]= min(weight, candidates[end])

@@ -7,14 +7,6 @@ def sortCandidates(g):
     candidates.sort()
     return candidates
 
-#incio: [0,1,2,3,4,5,6, 7]
-#primera iteracion {1,3}
-#[0,1,2,1,4,5,6, 7]
-#{4,5}
-#[0,1,2,1,4,4,6, 7]
-#{1,4}
-#[0,1,2,1,1,1,6, 7]
-
 def updateComponents(components, new_id, old_id):
     for i in range(len(components)):
         if components[i] == old_id:
