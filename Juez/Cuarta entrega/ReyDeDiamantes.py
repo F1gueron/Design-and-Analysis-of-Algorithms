@@ -16,16 +16,22 @@ def recBinarySearch(v, number):
 
 
 def kill_players(matrix, attacked, n):
-    twoDimensionMatrix = [matrix[i][j] for i in range(n) for j in range(n)] #3D to 2D
+    twoDimensionMatrix = [matrix[i][j] for i in range(n) for j in range(n)]  # 3D to 2D
     eliminated_positions = set()
+
     for numero in attacked:
         index = recBinarySearch(twoDimensionMatrix, numero)
         if index >= 0:
-            eliminated_positions.add(index)
+            while index < len(twoDimensionMatrix) and (index in eliminated_positions or twoDimensionMatrix[index] == "X"):
+                index += 1
         else:
             index = -index - 1
-            if index < len(twoDimensionMatrix):
-                eliminated_positions.add(index)
+            while index < len(twoDimensionMatrix) and (index in eliminated_positions or twoDimensionMatrix[index] == "X"):
+                index += 1
+
+        if index < len(twoDimensionMatrix):
+            eliminated_positions.add(index)
+
     result = []
     for i in range(n):
         row_start = i * n
@@ -41,12 +47,12 @@ def kill_players(matrix, attacked, n):
 
 
 if __name__ == "__main__":
-    n = int(input())  
+    n = int(input())
     matrix = []
     for i in range(n):
         row = list(map(int, input().split()))
         matrix.append(row)
-    attacked = list(map(int, input().split()))  
+    attacked = list(map(int, input().split()))
     result = kill_players(matrix, attacked, n)
     for fila in result:
         print(' '.join(map(str, fila)))
