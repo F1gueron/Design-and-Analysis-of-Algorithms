@@ -4,30 +4,24 @@ def backtrack(objetos, peso_max, beneficio_min, index=0, actual=None, mejor_sol=
     if mejor_sol is None:
         mejor_sol = {"objetos": [], "peso": 0, "beneficio": 0}
 
-    # Caso base: Ya hemos procesado todos los objetos
     if index == len(objetos):
-        if (actual["beneficio"] >= beneficio_min or mejor_sol["beneficio"] == 0) and actual["peso"] <= peso_max:
-            # Si esta solución es mejor, la guardamos
+        if actual["peso"] <= peso_max:
             if actual["beneficio"] > mejor_sol["beneficio"]:
                 mejor_sol["objetos"] = list(actual["objetos"])
                 mejor_sol["beneficio"] = actual["beneficio"]
                 mejor_sol["peso"] = actual["peso"]
         return mejor_sol
 
-    # No incluir el objeto actual
     mejor_sol = backtrack(objetos, peso_max, beneficio_min, index + 1, actual, mejor_sol)
 
-    # Incluir el objeto actual si no excede el peso máximo
     obj_nombre, obj_peso, obj_beneficio = objetos[index]
     if actual["peso"] + obj_peso <= peso_max:
         actual["objetos"].append(obj_nombre)
         actual["peso"] += obj_peso
         actual["beneficio"] += obj_beneficio
 
-        # Llamada recursiva con el objeto incluido
         mejor_sol = backtrack(objetos, peso_max, beneficio_min, index + 1, actual, mejor_sol)
 
-        # Retroceso: quitar el objeto actual
         actual["objetos"].pop()
         actual["peso"] -= obj_peso
         actual["beneficio"] -= obj_beneficio
