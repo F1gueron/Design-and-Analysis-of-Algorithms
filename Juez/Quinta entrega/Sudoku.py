@@ -13,7 +13,6 @@ def rowValida(j,k,sudoku):
 
 
 def cuadranteValido(i,j,k,sudoku):
-    cuadrante = (i // 3) * 3 + (j // 3)
     for x in range((i // 3) * 3, (i // 3) * 3 + 3):
         for y in range((j // 3) * 3, (j // 3) * 3 + 3):
             if sudoku[x][y] == k:
@@ -31,8 +30,10 @@ def solve(sudoku):
                 for k in range(1,10):
                     if posValida(i,j,k,sudoku):
                         sudoku[i][j] = k
+                        print("Probando con ", k, "en ", i," ",j)
                         if solve(sudoku):
                             return True
+                        print("Esta no vale: ", k)
                         sudoku[i][j] = 0
                 return False
     return True
@@ -45,4 +46,3 @@ if __name__ == "__main__":
     if solve(sudoku):
         for fila in sudoku:
             print(*fila)
-

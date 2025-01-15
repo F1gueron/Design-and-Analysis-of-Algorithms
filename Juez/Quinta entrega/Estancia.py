@@ -3,17 +3,15 @@ def backtrack(objetos, peso_max, beneficio_min, index=0, actual=None, mejor_sol=
         actual = {"objetos": [], "peso": 0, "beneficio": 0}
     if mejor_sol is None:
         mejor_sol = {"objetos": [], "peso": 0, "beneficio": 0}
-
     if index == len(objetos):
+        print("Entra")
         if actual["peso"] <= peso_max:
             if actual["beneficio"] > mejor_sol["beneficio"]:
                 mejor_sol["objetos"] = list(actual["objetos"])
                 mejor_sol["beneficio"] = actual["beneficio"]
                 mejor_sol["peso"] = actual["peso"]
         return mejor_sol
-
     mejor_sol = backtrack(objetos, peso_max, beneficio_min, index + 1, actual, mejor_sol)
-
     obj_nombre, obj_peso, obj_beneficio = objetos[index]
     if actual["peso"] + obj_peso <= peso_max:
         actual["objetos"].append(obj_nombre)
