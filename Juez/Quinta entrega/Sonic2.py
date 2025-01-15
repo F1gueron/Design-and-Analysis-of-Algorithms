@@ -65,3 +65,21 @@ if __name__ == "__main__":
     resultado = BT(N, cuadrado, Ex, Ey, (Sx, Sy), anillos, visitados)
 
     print(resultado+1)
+
+
+
+
+    def bs(low,high,number,array):
+        if low > high:
+            return -low-1
+
+        mid = (high+low)//2
+        if(array[mid]) == number:
+            return mid
+        elif number < array[mid]:
+            bs(low,mid-1,number,array)
+        else:
+            bs(mid+1, high, number, array)
+
+
+

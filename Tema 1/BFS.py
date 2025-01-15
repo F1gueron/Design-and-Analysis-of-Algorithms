@@ -35,3 +35,19 @@ g = [[],
     [7,8]]
 
 bfs(g)
+
+
+
+def bs(low, high, number, array):
+    if low > high:
+        return -low-1
+
+    mid = (low+high) // 2
+    if array[mid] == number:
+        return mid
+    elif number < array[mid]: # Si el
+        bs(mid+1,high,number,array)
+    else:
+        bs(low, mid-1, number, array)
+
+

@@ -13,6 +13,8 @@ def rec_bs(v, number, low, high):
 
 
 def recBinarySearch(v, number):
+    print(v)
+    print(number)
     return rec_bs(v, number, 0, len(v) - 1)
 
 
@@ -26,7 +28,7 @@ def clear_souls(levels, cases):
 
     for knight_level in cases:
         index = recBinarySearch(levels, knight_level)
-
+        print("Index", index)
         if index >= 0:
             enemies_defeated = index + 1
             points = array_sumas[index]

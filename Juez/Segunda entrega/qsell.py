@@ -8,9 +8,6 @@ def best(partners, candidates,attractive):
             best_candidate = i
     return best_candidate
 
-def notOut():
-    pass
-
 
 def greedy(concursante):
     n = concursante[2]

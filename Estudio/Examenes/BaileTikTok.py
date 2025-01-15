@@ -21,7 +21,6 @@ def bfsAux(g, visited,m):
 def bfs(g, m):
     n = len(g)
     visited = [False] * n
-    sol = 0
     sol = bfsAux(g,visited,m)
     return sol
 

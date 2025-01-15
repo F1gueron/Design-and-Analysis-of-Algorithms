@@ -26,7 +26,7 @@ def merge(first, second, output):
 def mergeSort(elements):
     if len(elements) < 2:
         #Dividir hasta tamaño 1 es un caso teórico. Lo habitual es dividir hata un tamaño
-        #mayor para utilizar un método iterativo (como la burbuja)
+        #mayor para utilizar un metodo iterativo (como la burbuja)
         return
     mid = len(elements) // 2
     left = elements[:mid]
